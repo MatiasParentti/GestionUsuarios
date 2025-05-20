@@ -1,0 +1,27 @@
+<h1>Editar Rol</h1>
+
+<form action="/roles/<%= role.id %>" method="POST">
+  <label>Nombre:</label>
+  <input type="text" name="name" value="<%= role.name %>" required />
+
+  <h3>Permisos</h3>
+  <% if (permisos.length === 0) { %>
+    <p>No hay permisos</p>
+  <% } else { %>
+    <% permisos.forEach(permiso => { %>
+      <div>
+        <label>
+          <input
+  type="checkbox"
+  name="permisos"
+  value="<%= permiso.id %>"
+  <%= permisosAsignadosIds.includes(Number(permiso.id)) ? 'checked' : '' %>
+/>
+          <%= permiso.name %>
+        </label>
+      </div>
+    <% }) %>
+  <% } %>
+
+  <button type="submit">Actualizar</button>
+</form>
