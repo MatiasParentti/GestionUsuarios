@@ -14,7 +14,7 @@ function getPermisoById(req, res) {
   try {
     const permiso = Permiso.getById(req.params.id);
     if (!permiso) return res.status(404).send("Permiso no encontrado");
-    res.render("permiso/detail", { permiso });
+    res.render("permisos/detail", { permiso });
   } catch (err) {
     console.error("[Error]", err.message);
     res.status(500).send("Error al buscar el permiso");
