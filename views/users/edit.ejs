@@ -1,0 +1,31 @@
+<h1>Editar Usuario</h1>
+<button type="button" id="editBtn" onclick="enableEdit()">Editar</button>
+<form id="editForm" action="/users/<%= users.id %>" method="post">
+    <label id="name">Nombre:</label>
+    <input type="text" name="name" value="<%= users.user %>" required disabled />
+    <br>
+    <label id="email">Email:</label>
+    <input type="email" name="email" value="<%= users.email %>" required disabled>
+    <br>
+    <label for="role_id">Rol</label>
+    <input type="text" id="roleInput" name="rol.name" value="<%= rol.name %>" disabled>
+    <select id="roleSelect" name="role_id" style="display:none" required>
+        <% roles.forEach(function(role) { %>
+            <option value="<%= role.id %>" <%= role.id === rol.id ? 'selected' : '' %>><%= role.name %></option>
+        <% }); %>
+    </select>
+    <br>
+    <button type="submit" id="updateBtn" disabled>Actualizar</button>
+</form>
+<script>
+function enableEdit() {
+    const form = document.getElementById('editForm');
+    Array.from(form.elements).forEach(el => {
+        if (el.tagName === 'INPUT' && el.type !== 'hidden') el.disabled = false;
+    });
+    document.getElementById('updateBtn').disabled = false;
+    document.getElementById('editBtn').disabled = true;
+    document.getElementById('roleInput').style.display = 'none';
+    document.getElementById('roleSelect').style.display = '';
+}
+</script>
