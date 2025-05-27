@@ -2,6 +2,7 @@
 const Role = require("../models/role.model");
 const Permiso = require("../models/permiso.model");
 const RolPermiso = require("../models/rolpermiso.model");
+
 function getAllRoles(req, res) {
   try {
     const roles = Role.getAll();

@@ -1,0 +1,22 @@
+<h1>Nuevo usuario</h1>
+<a href="/">Listado de Usuarios</a>
+<br>
+<div>
+<form action="/users" method="POST">
+  <label for="name">Nombre:</label>
+  <input type="text" name="name" id="name" required />
+  <br>
+  <label for="email">Email:</label>
+  <input type="email" name="email" id="email" required>
+  <br>
+  <label for="role_id">Seleccioná un Rol</label>
+  <select name="role_id" id="role_id">
+    <% roles.forEach (rol => { %>
+      <option value="<%= rol.id %>" selected><%= rol.name %></option>
+    <% }) %>
+  </select>
+  <br>
+  <button type="submit">Crear</button>
+</form>
+</div>
+
