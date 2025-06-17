@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Users</title>
+  <title>Usuarios</title>
   <link rel="stylesheet" href="/stylesheets/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -11,6 +11,9 @@
   <div class="d-flex justify-content-between align-items-center mb-3">
     
     <a href="/users/new" class="btn btn-primary">Nuevo Usuario</a>
+    <a href="/roles" class="btn btn-primary">Roles</a>
+    <a href="/permisos" class="btn btn-primary">Permisos</a>
+    
   </div>
   <ul class="list-group">
     <% users.forEach(user => { %>
@@ -22,30 +25,28 @@
             Rol: <%= user.rol_name %>
             <br>
             Permisos por rol:
-            <% 
+            <%
               let foundPerm = false;
               perms.forEach(perm => {
-                if (perm.role_id === user.role_id) { %>
-                  <%= JSON.stringify(perm.permisos) %>
-                  <% foundPerm = true; %>
-                <% }
+                if (perm.role_id === user.role_id && perm.permisos && perm.permisos.length > 0) { %>
+                  <ul>
+                    <% perm.permisos.forEach(p => { %>
+                      <li><%= p.name %></li>
+                    <% }) %>
+                  </ul>
+                  <%
+                  foundPerm = true;
+                }
               });
               if (!foundPerm) { %>
                 <span class="text-muted">Sin permisos</span>
               <% }
             %>
-            
-
-            
-                  
 
             <div>
               <small class="text-muted">
-            
                 <br>
-               
                 <br>
-                
               </small>
             </div>
           </div>
