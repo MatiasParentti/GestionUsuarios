@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Edición de Roles</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+
+  <div class="mb-3">
+    <a href="/roles" class="btn btn-primary">Volver</a>
+  </div>
+
 <h1>Editar Rol</h1>
 
 <form action="/roles/<%= role.id %>" method="POST">
@@ -11,12 +25,7 @@
     <% permisos.forEach(permiso => { %>
       <div>
         <label>
-          <input
-  type="checkbox"
-  name="permisos"
-  value="<%= permiso.id %>"
-  <%= permisosAsignadosIds.includes(Number(permiso.id)) ? 'checked' : '' %>
-/>
+<input type="checkbox" name="permisos[]" value="<%= permiso.id %>" <%= permisosAsignadosIds.includes(Number(permiso.id)) ? 'checked' : '' %> />
           <%= permiso.name %>
         </label>
       </div>

@@ -12,7 +12,8 @@ db.exec(`
 
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user TEXT NOT NULL,
+    name TEXT NOT NULL,
+    lastname TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
     role_id INTEGER,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
