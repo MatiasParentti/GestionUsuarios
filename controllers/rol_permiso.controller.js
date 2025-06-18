@@ -30,7 +30,7 @@ function getPermisosPorRol(req, res) {
   try {
     const rol_id = req.params.rol_id;
     const permisosAsignados = Rol_permiso.getPermisosPorRol(rol_id);
-    res.json(permisosAsignados); // responde con JSON para usarlo en front o EJS
+    res.json(permisosAsignados); 
   } catch (err) {
     console.error('[Error]', err.message);
     res.status(500).send('Error al obtener permisos del rol');

@@ -6,6 +6,10 @@ const roleRoutes = require("./routes/role.routes");
 const permisoRoutes = require("./routes/permiso.routes");
 const rolPermisoRoutes = require('./routes/rol_permiso.routes');
 
+const authRoutes = require('./routes/auth.routes');
+const cookieParser = require('cookie-parser');
+const sessionMiddleware = require('./middleware/session.middleware');
+
 const createError = require("http-errors");
 
 // Instancia de la app
@@ -19,17 +23,32 @@ app.set("views", path.join(__dirname, "views"));
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cookieParser());
+
 
 // Configuracion de rutas
 app.use("/users", userRoutes);
 app.use("/roles", roleRoutes);
 app.use("/permisos", permisoRoutes);
-app.use('/', rolPermisoRoutes);
+app.use('/rolpermiso', rolPermisoRoutes);
+app.use('/auth', authRoutes);
+
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+app.get('/dashboard', sessionMiddleware, (req, res) => {
+  res.render('dashboard');
+});
+
+
 
 // Configuracion de redireccion (por defecto)
 app.get("/", (req, res) => {
-  res.redirect("/users");
+  res.redirect("/login");
 });
+
+
 
 // Middleware de error 404
 app.use((req, res, next) => {
@@ -44,5 +63,9 @@ app.use((err, req, res, next) => {
     error: app.get("env") === "development" ? err : {},
   });
 });
+
+
+
+
 
 module.exports = app;
