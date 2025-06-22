@@ -5,11 +5,12 @@ const userRoutes = require("./routes/user.routes");
 const roleRoutes = require("./routes/role.routes");
 const permisoRoutes = require("./routes/permiso.routes");
 const rolPermisoRoutes = require("./routes/rol_permiso.routes");
-
+const logRequest = require("./middleware/logRequest");
+const logResponse = require("./middleware/logResponse");
+const auditAccess = require("./middleware/auditLogger");
 const authRoutes = require("./routes/auth.routes");
 const cookieParser = require("cookie-parser");
 const sessionMiddleware = require("./middleware/session.middleware");
-
 const createError = require("http-errors");
 
 // Instancia de la app
@@ -24,6 +25,12 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
+
+
+// logs
+app.use(logRequest);
+app.use(logResponse);
+app.use(auditAccess);
 
 // Configuracion de rutas
 app.use("/users", sessionMiddleware, userRoutes);
